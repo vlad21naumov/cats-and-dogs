@@ -18,10 +18,6 @@ class ImageClassifier(pl.LightningModule):
         self.lr = lr
         self.loss_fn = torch.nn.CrossEntropyLoss()
 
-        # Backbone + layers example
-        # self.backbone = AutoModel.from_pretrained(...)
-        # self.lin_layer = torch.nn.Linear(encoder_dim, output_dim)
-
     def forward(self, x):
         return self.model(x)
 

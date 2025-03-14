@@ -9,8 +9,6 @@ from cats_and_dogs.pl_modules.model import ImageClassifier
 
 def main():
     pl.seed_everything(42)
-    # if you want to use matmul precision:
-    # torch.set_float32_matmul_precision("medium")
     dm = MyDataModule(
         train_path="../../data/train_11k",
         val_path="../../data/train_11k",
@@ -53,11 +51,8 @@ def main():
 
     trainer = pl.Trainer(
         accelerator="cpu",
-        # devices=0,
-        # strategy="deepspeed_stage_2",
         precision=32,
         max_epochs=10,
-        # max_steps=... - alternative to max_epochs
         accumulate_grad_batches=1,
         val_check_interval=1.0,
         overfit_batches=0,
@@ -72,10 +67,6 @@ def main():
         logger=loggers,
         callbacks=callbacks,
     )
-
-    # Batch size tuner:
-    # tuner = pl.tuner.Tuner(trainer)
-    # tuner.scale_batch_size(model, datamodule=dm, mode="power")
 
     trainer.fit(model, datamodule=dm)
 
