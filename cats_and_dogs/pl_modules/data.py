@@ -367,7 +367,7 @@ class MyDataModule(pl.LightningDataModule):
             will have an argument ``dataloader_idx`` which matches the order here.
         """
         return torch.utils.data.DataLoader(
-            self.config["data_loading"]["test_data_path"],
+            self.test_dataset,
             batch_size=self.config["training"]["batch_size"],
             shuffle=False,
             num_workers=self.config["training"]["num_workers"],

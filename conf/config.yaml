@@ -3,3 +3,4 @@ defaults:
   - model: model
   - training: training
   - logging: logging
+  - inference: inference
