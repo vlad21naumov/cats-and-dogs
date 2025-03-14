@@ -45,30 +45,10 @@ def main(config: DictConfig):
             dirpath=config["model"]["model_local_path"],
             filename="{epoch:02d}-{val_loss:.4f}",
             monitor="val_loss",
-            save_top_k=5,
-            every_n_train_steps=None,
-            every_n_epochs=1,
+            save_top_k=config["model"]["save_top_k"],
+            every_n_epochs=config["model"]["every_n_epochs"],
         )
     )
-
-    # trainer = pl.Trainer(
-    #     accelerator="gpu",
-    #     precision=32,
-    #     max_epochs=10,
-    #     accumulate_grad_batches=1,
-    #     val_check_interval=1.0,
-    #     overfit_batches=0,
-    #     num_sanity_val_steps=4,
-    #     deterministic=False,
-    #     benchmark=False,
-    #     gradient_clip_val=2.0,
-    #     profiler=None,
-    #     log_every_n_steps=1,
-    #     detect_anomaly=False,
-    #     enable_checkpointing=True,
-    #     logger=loggers,
-    #     callbacks=callbacks,
-    # )
 
     trainer = pl.Trainer(
         max_epochs=config["training"]["num_epochs"],
