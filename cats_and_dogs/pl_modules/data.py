@@ -47,26 +47,19 @@ class MyDataModule(pl.LightningDataModule):
                 # called on every process in DDP
     """
 
-    def __init__(
-        self,
-        train_path: str,
-        val_path: str,
-        test_path: str,
-        batch_size: int = 32,
-        num_workers: int = 6,
-    ):
+    def __init__(self, config):
         super().__init__()
         self.save_hyperparameters()
-        self.train_path = train_path
-        self.val_path = val_path
-        self.test_path = test_path
-        self.batch_size = batch_size
-        self.num_workers = num_workers
+        self.config = config
         self.transform = torchvision.transforms.Compose(
             [
-                transforms.Resize((96, 96)),
+                transforms.Resize(
+                    (config["model"]["image_height"], config["model"]["image_width"])
+                ),
                 transforms.ToTensor(),
-                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+                transforms.Normalize(
+                    config["model"]["image_mean"], config["model"]["image_std"]
+                ),
             ]
         )
 
@@ -156,9 +149,15 @@ class MyDataModule(pl.LightningDataModule):
                     data = load_data(...)
                     self.l1 = nn.Linear(28, data.num_classes)
         """
-        self.train_dataset = MyDataset(self.train_path, transform=self.transform)
-        self.val_dataset = MyDataset(self.val_path, transform=self.transform)
-        self.test_dataset = MyDataset(self.test_path, transform=self.transform)
+        self.train_dataset = MyDataset(
+            self.config["data_loading"]["train_data_path"], transform=self.transform
+        )
+        self.val_dataset = MyDataset(
+            self.config["data_loading"]["val_data_path"], transform=self.transform
+        )
+        self.test_dataset = MyDataset(
+            self.config["data_loading"]["test_data_path"], transform=self.transform
+        )
 
     def train_dataloader(self) -> torch.utils.data.DataLoader:
         """Implement one or more PyTorch DataLoaders for training.
@@ -231,9 +230,9 @@ class MyDataModule(pl.LightningDataModule):
         """
         return torch.utils.data.DataLoader(
             self.train_dataset,
-            batch_size=self.batch_size,
+            batch_size=self.config["training"]["batch_size"],
             shuffle=True,
-            num_workers=self.num_workers,
+            num_workers=self.config["training"]["num_workers"],
         )
 
     def val_dataloader(self) -> torch.utils.data.DataLoader:
@@ -287,9 +286,9 @@ class MyDataModule(pl.LightningDataModule):
         """
         return torch.utils.data.DataLoader(
             self.val_dataset,
-            batch_size=self.batch_size,
+            batch_size=self.config["training"]["batch_size"],
             shuffle=False,
-            num_workers=self.num_workers,
+            num_workers=self.config["training"]["num_workers"],
         )
 
     def test_dataloader(self) -> torch.utils.data.DataLoader:
@@ -368,10 +367,10 @@ class MyDataModule(pl.LightningDataModule):
             will have an argument ``dataloader_idx`` which matches the order here.
         """
         return torch.utils.data.DataLoader(
-            self.test_dataset,
-            batch_size=self.batch_size,
+            self.config["data_loading"]["test_data_path"],
+            batch_size=self.config["training"]["batch_size"],
             shuffle=False,
-            num_workers=self.num_workers,
+            num_workers=self.config["training"]["num_workers"],
         )
 
     def teardown(self, stage: str) -> None:
