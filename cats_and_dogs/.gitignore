@@ -1,1 +1,4 @@
 outputs/
+wandb/
+mlruns/
+lightning_logs/

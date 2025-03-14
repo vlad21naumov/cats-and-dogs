@@ -129,7 +129,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-data/*
+# data/*
+# !data/*.dvc
 checkpoints/
 lightning_logs/
 wandb/
