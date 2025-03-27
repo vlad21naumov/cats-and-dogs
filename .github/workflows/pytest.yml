@@ -29,7 +29,7 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
         run: |
           pytest tests/ \
-            -m "not requires_model" \
+            -m "not requires_files" \
             --cov=cats_and_dogs \
             --cov-report=xml \
             -v
@@ -39,5 +39,5 @@ jobs:
 
       - name: Notify about skipped model tests
         run: |
-          echo "Skipped tests marked with @pytest.mark.requires_model"
-          echo "To run them locally: pytest -m requires_model"
+          echo "Skipped tests marked with @pytest.mark.requires_files"
+          echo "To run them locally: pytest -m requires_files"
