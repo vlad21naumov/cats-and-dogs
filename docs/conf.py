@@ -1,7 +1,3 @@
-import os
-import sys
-
-
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -10,12 +6,16 @@ import sys
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = "Cats-Dogs"
-copyright = "2024, Vladislav Naumov"
+import os
+import sys
+
+project = "Cats And Dogs"
+copyright = "2025, Vladislav Naumov"
 author = "Vladislav Naumov"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
+sys.path.insert(0, os.path.abspath(".."))
 sys.path.insert(0, os.path.abspath("../scripts"))
 sys.path.insert(0, os.path.abspath("../cats_and_dogs"))
 
