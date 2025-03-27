@@ -5,7 +5,7 @@ import pytest
 from cats_and_dogs.pl_modules.model import ImageClassifier
 
 
-@pytest.mark.requires_model
+@pytest.mark.requires_files
 def test_model_loading(request):
     model_path = request.config.getoption("--model-path")
     if not model_path:
