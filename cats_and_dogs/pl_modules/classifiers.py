@@ -4,7 +4,7 @@ import torch
 class SimpleClassifier(torch.nn.Module):
     """Linear model for classification of images"""
 
-    def __init__(self):
+    def __init__(self, num_classes: int):
         super().__init__()
         self.model = torch.nn.Sequential(
             torch.nn.Flatten(),
@@ -12,7 +12,7 @@ class SimpleClassifier(torch.nn.Module):
             torch.nn.ReLU(),
             torch.nn.Linear(256, 128),
             torch.nn.ReLU(),
-            torch.nn.Linear(128, 2),
+            torch.nn.Linear(128, num_classes),
             torch.nn.Softmax(dim=1),
         )
 

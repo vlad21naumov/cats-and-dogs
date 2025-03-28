@@ -131,7 +131,7 @@ dmypy.json
 
 # data/*
 # !data/*.dvc
-checkpoints/
+!checkpoints/*.dvc
 lightning_logs/
 wandb/
 mlruns/
