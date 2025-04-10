@@ -1,13 +1,12 @@
 import hydra
 import pytorch_lightning as pl
 from omegaconf import DictConfig
+from pl_modules.classifiers import ConvClassifier
+from pl_modules.data import MyDataModule
+from pl_modules.model import ImageClassifier
 
-from cats_and_dogs.pl_modules.classifiers import ConvClassifier
-from cats_and_dogs.pl_modules.data import MyDataModule
-from cats_and_dogs.pl_modules.model import ImageClassifier
 
-
-@hydra.main(version_base=None, config_path="../../conf", config_name="config")
+@hydra.main(version_base=None, config_path="../conf", config_name="config")
 def main(config: DictConfig):
     pl.seed_everything(42)
     dm = MyDataModule(config)
