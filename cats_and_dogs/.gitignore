@@ -1,4 +1,4 @@
-__pycache__
-lightning_logs
-outputs
-wandb
+outputs/
+wandb/
+mlruns/
+lightning_logs/

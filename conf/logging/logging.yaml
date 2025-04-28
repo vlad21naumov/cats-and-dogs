@@ -2,7 +2,7 @@ label: wandb
 
 # Wandb
 project: cats-and-dogs
-name: linear-model-exp
+name: conv-model-exp
 save_dir: "."
 
 # MLFlow
