@@ -2,9 +2,9 @@ import time
 
 import numpy as np
 import torch
+
 from data import init_dataloader, init_dataset
 from models import SimpleClassifier
-
 
 TRAIN_DATASET_PATH = "../data/train_11k"
 VAL_DATASET_PATH = "../data/val"
@@ -16,14 +16,7 @@ NUM_EPOCHS = 3
 
 
 def train_model(
-        model, 
-        train_loader, 
-        val_loader, 
-        loss_fn, 
-        opt, 
-        device, 
-        n_epochs,
-        save_model_name
+    model, train_loader, val_loader, loss_fn, opt, device, n_epochs, save_model_name
 ):
     """Training the model
 

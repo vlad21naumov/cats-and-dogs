@@ -4,8 +4,6 @@ import torch
 from data import init_dataloader, init_dataset
 from models import SimpleClassifier
 
-
-
 TEST_DATASET_PATH = "../data/test_labeled"
 MODEL_PATH = "../models/simple_model_0.5600000023841858.pt"
 
