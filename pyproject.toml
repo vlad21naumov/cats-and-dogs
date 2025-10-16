@@ -1,0 +1,14 @@
+[project]
+name = "cats-and-dogs"
+version = "0.1.0"
+description = "MlOps repo example"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fire>=0.7.1",
+    "numpy>=2.3.3",
+    "pandas>=2.3.3",
+    "requests>=2.32.5",
+    "torch>=2.8.0",
+    "torchvision>=0.23.0",
+]
