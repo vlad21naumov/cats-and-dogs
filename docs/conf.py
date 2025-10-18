@@ -8,6 +8,7 @@
 import os
 import sys
 
+
 sys.path.insert(0, os.path.abspath("../cats_and_dogs"))
 sys.path.insert(0, os.path.abspath("../scripts"))
 

@@ -6,6 +6,7 @@ import torch
 from data import init_dataloader, init_dataset
 from models import SimpleClassifier
 
+
 TRAIN_DATASET_PATH = "../data/train_11k"
 VAL_DATASET_PATH = "../data/val"
 MODEL_NAME = "simple_model"
