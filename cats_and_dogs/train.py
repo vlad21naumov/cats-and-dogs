@@ -2,7 +2,6 @@ import time
 
 import numpy as np
 import torch
-
 from data import init_dataloader, init_dataset
 from models import SimpleClassifier
 
