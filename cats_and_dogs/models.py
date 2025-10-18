@@ -23,7 +23,7 @@ class SimpleClassifier(torch.nn.Module):
 class ConvClassifier(torch.nn.Module):
     """Convolutional model for classification of images"""
 
-    def __init__(self, num_classes: int):
+    def __init__(self, num_classes: int, dropout_prob: float = 0.5):
         super().__init__()
         self.model = torch.nn.Sequential(
             torch.nn.Conv2d(3, 32, 3, stride=2, padding=1),
@@ -40,7 +40,7 @@ class ConvClassifier(torch.nn.Module):
             # torch.nn.Dropout(0.3),
             torch.nn.Flatten(),
             torch.nn.Linear(4608, 96),
-            torch.nn.Dropout(0.5),
+            torch.nn.Dropout(dropout_prob),
             torch.nn.Linear(96, num_classes, bias=False),
             torch.nn.Softmax(dim=1),
         )
