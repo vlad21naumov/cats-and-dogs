@@ -22,7 +22,8 @@ repos:
     rev: 7.0.0
     hooks:
       - id: isort
-        args: ["--profile", "black"]
+        args:
+          ["--profile", "black", "--line-length=90", "--lines-after-imports=2"]
 
   - repo: https://github.com/PyCQA/flake8
     rev: 7.3.0
