@@ -3,8 +3,8 @@ import time
 import numpy as np
 import torch
 
-from data import init_dataloader, init_dataset
-from models import SimpleClassifier
+from vanilla.data import init_dataloader, init_dataset
+from vanilla.models import SimpleClassifier
 
 
 TRAIN_DATASET_PATH = "../data/train_11k"
