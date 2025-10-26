@@ -1,8 +1,8 @@
 import numpy as np
 import pytorch_lightning as pl
-from model import ImageClassifier
 
-from data import MyDataModule
+from pl_modules.data import MyDataModule
+from pl_modules.model import ImageClassifier
 
 
 def main():

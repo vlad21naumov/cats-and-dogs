@@ -3,8 +3,6 @@ from typing import Any
 import pytorch_lightning as pl
 import torch
 
-# import wandb
-
 
 class ImageClassifier(pl.LightningModule):
     """Module for training and evaluation models
