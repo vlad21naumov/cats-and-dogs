@@ -47,14 +47,19 @@ class MyDataModule(pl.LightningDataModule):
                 # called on every process in DDP
     """
 
-    def __init__(self):
+    def __init__(self, cfg):
         super().__init__()
+        self.cfg = cfg
         self.save_hyperparameters()
         self.transform = torchvision.transforms.Compose(
             [
-                transforms.Resize((96, 96)),
+                transforms.Resize(
+                    (cfg["model"]["image_height"], cfg["model"]["image_width"])
+                ),
                 transforms.ToTensor(),
-                transforms.Normalize([0.485, 0.456, 0.406], [0.229, 0.224, 0.225]),
+                transforms.Normalize(
+                    cfg["model"]["image_mean"], cfg["model"]["image_std"]
+                ),
             ]
         )
 
@@ -144,10 +149,14 @@ class MyDataModule(pl.LightningDataModule):
                     data = load_data(...)
                     self.l1 = nn.Linear(28, data.num_classes)
         """
-        self.train_dataset = MyDataset("../../data/train_11k", transform=self.transform)
-        self.val_dataset = MyDataset("../../data/val", transform=self.transform)
+        self.train_dataset = MyDataset(
+            self.cfg["data_loading"]["train_data_path"], transform=self.transform
+        )
+        self.val_dataset = MyDataset(
+            self.cfg["data_loading"]["val_data_path"], transform=self.transform
+        )
         self.test_dataset = MyDataset(
-            "../../data/test_labeled", transform=self.transform
+            self.cfg["data_loading"]["test_data_path"], transform=self.transform
         )
 
     def train_dataloader(self) -> torch.utils.data.DataLoader:
@@ -221,9 +230,9 @@ class MyDataModule(pl.LightningDataModule):
         """
         return torch.utils.data.DataLoader(
             self.train_dataset,
-            batch_size=256,
+            batch_size=self.cfg["training"]["batch_size"],
             shuffle=True,
-            num_workers=3,
+            num_workers=self.cfg["training"]["num_workers"],
         )
 
     def val_dataloader(self) -> torch.utils.data.DataLoader:
@@ -277,9 +286,9 @@ class MyDataModule(pl.LightningDataModule):
         """
         return torch.utils.data.DataLoader(
             self.val_dataset,
-            batch_size=256,
+            batch_size=self.cfg["training"]["batch_size"],
             shuffle=False,
-            num_workers=3,
+            num_workers=self.cfg["training"]["num_workers"],
         )
 
     def test_dataloader(self) -> torch.utils.data.DataLoader:
@@ -359,9 +368,9 @@ class MyDataModule(pl.LightningDataModule):
         """
         return torch.utils.data.DataLoader(
             self.test_dataset,
-            batch_size=256,
+            batch_size=self.cfg["training"]["batch_size"],
             shuffle=False,
-            num_workers=3,
+            num_workers=self.cfg["training"]["num_workers"],
         )
 
     def teardown(self, stage: str) -> None:

@@ -130,13 +130,14 @@ dmypy.json
 .pyre/
 
 data/*
-# !data/*.dvc
-!checkpoints/*.dvc
+!data/*.dvc
+models/*
+!models/*.dvc
 lightning_logs/
 wandb/
 mlruns/
 mlops/
-models/
+outputs/
 
 *.tar
 *.tar.gz
