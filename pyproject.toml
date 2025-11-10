@@ -18,6 +18,12 @@ dependencies = [
     "wandb>=0.22.2",
 ]
 
+[tool.isort]
+src_paths = ["cats_and_dogs"]
+profile = "black"
+line_length = 90
+lines_after_imports = 2
+
 [dependency-groups]
 dev = [
     "autodocsumm>=0.2.14",
