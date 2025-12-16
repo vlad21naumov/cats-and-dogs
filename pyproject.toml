@@ -7,10 +7,14 @@ requires-python = ">=3.12"
 dependencies = [
     "dvc>=3.63.0",
     "fire>=0.7.1",
+    "flask>=3.1.2",
+    "flask-cors>=6.0.1",
     "hydra-core>=1.3.2",
-    "lightning>=2.5.5",
+    "mlflow>=3.6.0",
     "numpy>=2.3.3",
     "pandas>=2.3.3",
+    "pytest>=9.0.1",
+    "pytorch-lightning>=2.5.6",
     "requests>=2.32.5",
     "rich>=14.2.0",
     "torch>=2.8.0",
@@ -28,6 +32,9 @@ lines_after_imports = 2
 dev = [
     "autodocsumm>=0.2.14",
     "pre-commit>=4.3.0",
+    "pytest>=9.0.1",
+    "pytest-cov>=7.0.0",
+    "pytest-regressions>=2.8.3",
     "sphinx>=8.2.3",
     "sphinx-rtd-theme>=3.0.2",
 ]

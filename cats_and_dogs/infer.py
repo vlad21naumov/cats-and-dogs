@@ -2,6 +2,7 @@ import hydra
 import numpy as np
 import pytorch_lightning as pl
 from omegaconf import DictConfig
+
 from pl_modules.data import MyDataModule
 from pl_modules.model import ImageClassifier
 
