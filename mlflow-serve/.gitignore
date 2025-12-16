@@ -1,0 +1,4 @@
+artifacts
+uploads
+model_weights.pth
+cats_dogs_model
